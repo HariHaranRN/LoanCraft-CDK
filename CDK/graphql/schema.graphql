@@ -1,0 +1,61 @@
+type Loan {
+    loanID: String
+    name: String
+    parentName: String
+    date: String
+    mobile: String
+    aMobile: String
+    address: String
+    amount: Int
+    interest: Int
+    interestPaid: Int
+    notes: String
+    isActive: Boolean
+}
+
+type LoanHistory {
+    interestPaid: Int
+    date: String
+    loanID: String
+}
+
+input createLoanInput {
+    name: String!
+    parentName: String
+    date: String!
+    mobile: String!
+    aMobile: String
+    address: String
+    amount: Int!
+    interest: Int!
+    interestPaid: Int
+    notes: String
+}
+
+input updateLoanInput {
+    loanID: String
+    name: String
+    parentName: String
+    date: String
+    mobile: String
+    aMobile: String
+    address: String
+    amount: Int
+    interest: Int
+    notes: String
+}
+
+type Query {
+    getDashboard: [Loan]
+    getLoans(isActive: Boolean!): [Loan]
+    getLoanByID(loanID: String!): [Loan]
+    getLoanHistoryByID(loanID: String!): [LoanHistory]
+}
+
+type Mutation {
+    createLoan(loan: createLoanInput!): Loan
+    updateLoan(loan: updateLoanInput!): Loan
+    changeLoanStatus(loanID: String!, isActive: Boolean!): Loan
+    updatePendingAmount(loanID: String!, interestPaid: Int!, dateOfPaid: String!): Loan
+    deleteLoan(loanID: String!): String
+}

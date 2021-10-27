@@ -1,11 +1,21 @@
 <div class="row">
   <div class="col-md-12">
     <div class="card">
-      <div class="card-header bg-primary text-light">
-        <h4 class="card-title"> Closed Loans</h4>
+      <div class="card-header bg-primary d-flex">
+        <div class="col-md-9">
+          <h4 class="card-title text-light"> Closed Loans</h4>
+        </div>
+        <div class="col-md-3">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text text-dark bg-light" style="padding: 10px;" ><i class="fa fa-search"></i></span>
+            </div>
+            <input type="text" placeholder="Search here..." class="form-control form-control-sm" [(ngModel)]="search" required>
+          </div>
+        </div>
       </div>
       <div class="card-body">
-        <div class="table-responsive">
+        <div class="table-responsive" style="max-height: 600px;">
           <table class="table">
             <thead class=" text-primary text-center">
               <th>
@@ -34,14 +44,14 @@
               </th>
             </thead>
             <tbody>
-              <tr *ngFor="let row of closedTable.dataRows; index as i">
+              <tr *ngFor="let row of closedTable.dataRows | loanTableFilter:search; index as i">
                 <td class="text-center">{{ i + 1 }}</td>
                 <td class="text-center text-primary"><span placement="top" style="cursor:context-menu;" (click)="copyText(row[0])" ngbTooltip="✅ Copied" triggers="click:blur">{{ row[0] }}</span></td>
                 <td class="text-center">{{row[1] }}</td>
                 <td class="text-center"> {{row[2] | date:'dd-MM-yyyy'}}</td>
                 <td class="text-center">{{row[3] | currency:'INR':'symbol-narrow':'0.0'}}</td>
                 <td class="text-center">{{row[4] | currency:'INR':'symbol-narrow':'0.0'}}</td>
-                <td class="text-center"><i class="fa fa-eye" (click)="info(i)" style="font-size: 20px;cursor: pointer;"></i></td>
+                <td class="text-center"><i class="fa fa-eye" (click)="info(row[0])" style="font-size: 20px;cursor: pointer;"></i></td>
                 <td class="text-primary text-center"><i class="nc-icon nc-refresh-69" (click)="restore(row)"  style="font-size: 20px;cursor: pointer;"></i></td>
             </tr>
             </tbody>

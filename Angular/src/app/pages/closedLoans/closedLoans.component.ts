@@ -15,6 +15,7 @@ declare interface TableData {
 })
 
 export class ClosedLoansComponent implements OnInit{
+    search = '';
     public datas = [];
     public finalData = [];
     public closedTable: TableData
@@ -51,9 +52,10 @@ export class ClosedLoansComponent implements OnInit{
         }
     }
 
-    info(index){
+    info(loanID){
+        let value = this.finalData.filter((val: any) => val.loanID == loanID);
         const modalRef = this.modalService.open(InfoModalComponent  );
-        modalRef.componentInstance.loanData = this.finalData[index];
+        modalRef.componentInstance.loanData = value[0];
     }
 
     restore(rowData){

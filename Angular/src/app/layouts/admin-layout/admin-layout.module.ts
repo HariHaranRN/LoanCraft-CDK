@@ -23,6 +23,7 @@ import { PayInterestService } from 'app/pages/payInterest/payInterest.service';
 import { InterestHistoryComponent } from 'app/pages/InterestHistory/InterestHistory.component';
 import { LoanHistoryService } from 'app/pages/InterestHistory/interestHistory.service';
 import { DashboardService } from 'app/pages/dashboard/dashboard.service';
+import { SearchPipe } from 'app/shared/search.pipe';
 
 @NgModule({
   imports: [
@@ -44,6 +45,7 @@ import { DashboardService } from 'app/pages/dashboard/dashboard.service';
     RestoreLoanComponent,
     PayInterestComponent,
     InterestHistoryComponent,
+    SearchPipe
   ],
   providers: [
     DashboardService,

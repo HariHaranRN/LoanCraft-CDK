@@ -41,7 +41,7 @@
                 <td class="text-center"> {{row[2] | date:'dd-MM-yyyy'}}</td>
                 <td class="text-center">{{row[3] | currency:'INR':'symbol-narrow':'0.0'}}</td>
                 <td class="text-center">{{row[4] | currency:'INR':'symbol-narrow':'0.0'}}</td>
-                <td class="text-center" ><i class="nc-icon nc-zoom-split" (click)="info(row[0])" style="font-size: 20px;cursor: pointer;"></i></td>
+                <td class="text-center"><i class="fa fa-eye" (click)="info(i)" style="font-size: 20px;cursor: pointer;"></i></td>
                 <td class="text-primary text-center"><i class="nc-icon nc-refresh-69" (click)="restore(row)"  style="font-size: 20px;cursor: pointer;"></i></td>
             </tr>
             </tbody>

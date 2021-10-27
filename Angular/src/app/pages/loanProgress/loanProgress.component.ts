@@ -16,12 +16,13 @@ declare interface TableData {
 @Component({
     selector: 'loanProgress-cmp',
     moduleId: module.id,
-    templateUrl: './loanProgress.component.html'
+    templateUrl: './loanProgress.component.html',
 })
 
 export class LoanProgressComponent implements OnInit{
     public progressTable: TableData;
     datas = [];
+    finalData =[];
     showEdit = false;
     showTable = true;
     editLoanForm :FormGroup;
@@ -55,19 +56,19 @@ export class LoanProgressComponent implements OnInit{
             dataRows : []
         }
         let result = await this.LPS.getLoans(true);
-        let finalData = result.data.getLoans;
-        if(finalData.length > 0){
-            for(let i= 0; i < finalData.length; i++){
-                let created = new Date(finalData[i].date);
+        this.finalData = result.data.getLoans;
+        if(this.finalData.length > 0){
+            for(let i= 0; i < this.finalData.length; i++){
+                let created = new Date(this.finalData[i].date);
                 let currentDate = new Date();
                 var months;
                 months = (currentDate.getFullYear() - created.getFullYear()) * 12;
                 months -= created.getMonth();
                 months += currentDate.getMonth();
                 months <= 0 ? 0 : months;
-                var total = months * finalData[i].interest;
-                var pendingAmount = total - finalData[i].interestPaid;
-                this.datas[i] = [ finalData[i].loanID, finalData[i].name, finalData[i].date, finalData[i].amount, finalData[i].interest , pendingAmount]
+                var total = months * this.finalData[i].interest;
+                var pendingAmount = total - this.finalData[i].interestPaid;
+                this.datas[i] = [ this.finalData[i].loanID, this.finalData[i].name, this.finalData[i].date, this.finalData[i].amount, this.finalData[i].interest , pendingAmount]
             }
             this.datas.sort();
             this.datas.reverse();
@@ -111,9 +112,9 @@ export class LoanProgressComponent implements OnInit{
         sessionStorage.clear();
     }
 
-    info(loanID){
+    info(index: any){
         const modalRef = this.modalService.open(InfoModalComponent);
-        modalRef.componentInstance.loanID = loanID;
+        modalRef.componentInstance.loanData = this.finalData[index];
     }
 
     closeLoan(data){

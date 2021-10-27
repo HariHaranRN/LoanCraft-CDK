@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import { LoanProgressService } from '../loanProgress.service';
 
 
 @Component({
@@ -10,20 +9,12 @@ import { LoanProgressService } from '../loanProgress.service';
 })
 
 export class InfoModalComponent implements OnInit{
-@Input() loanID;
-loanInfo;
+@Input() loanData;
   constructor(
-      public activeModal: NgbActiveModal,
-      private LS: LoanProgressService) { }
+      public activeModal: NgbActiveModal) { }
 
 
-  async ngOnInit(){
-    let result = await this.LS.getLoanByID(this.loanID);
-    this.loanInfo = result.data.getLoanByID;
-      // this.infoService.getActiveLoans(this.loanID).then((result: any) =>{
-      //     this.loanInfo = result;
-      // })
-  }
+  async ngOnInit(){}
 
 
 }

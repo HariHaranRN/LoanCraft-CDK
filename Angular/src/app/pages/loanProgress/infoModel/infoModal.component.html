@@ -1,18 +1,18 @@
 <div class="modal-header">
-	<h4 class="modal-title">Information about <span class="text-primary">{{loanID}}</span></h4>
-	<button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+  <h4 class="modal-title">INFORMATION ABOUT <span class="text-primary">{{loanData.loanID}}</span></h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
 </div>
-<div class="modal-body" *ngFor="let info of loanInfo">
-    <p><b>Name :</b> {{info.name}}</p>
-    <p><b>Parent Name : </b>{{info.parentName}}</p>
-    <p><b>Address : </b>{{info.address}}</p>
-    <p><b>Date : </b>{{info.date | date:'dd-MM-yyyy' }}</p>
-    <p><b>Mobile No : </b>{{info.mobile}}</p>
-    <p *ngIf="info.aMobile == null"><b>Alternate Mobile : </b>{{info.aMobile}}</p>
-    <p><b>Amount : </b>{{info.amount}}</p>
-    <p><b>Interest : </b>{{info.interest}}</p>
-    <p><b>Interest paid : </b>{{info.interestPaid}}</p>
-    <p *ngIf = "info.notes == null"><b>Notes : </b>{{info.notes}}</p>
+<div class="modal-body" >
+    <p><b>Name :</b> {{loanData.name}}</p>
+    <p><b>Parent Name : </b>{{loanData.parentName}}</p>
+    <p><b>Address : </b>{{loanData.address}}</p>
+    <p><b>Date : </b>{{loanData.date | date:'dd-MM-yyyy' }}</p>
+    <p><b>Mobile No : </b>{{loanData.mobile}}</p>
+    <p *ngIf="loanData.aMobile == null"><b>Alternate Mobile : </b>{{loanData.aMobile}}</p>
+    <p><b>Amount : </b>{{loanData.amount}}</p>
+    <p><b>Interest : </b>{{loanData.interest}}</p>
+    <p><b>Interest paid : </b>{{loanData.interestPaid}}</p>
+    <p *ngIf = "loanData.notes == null"><b>Notes : </b>{{loanData.notes}}</p>
 </div>

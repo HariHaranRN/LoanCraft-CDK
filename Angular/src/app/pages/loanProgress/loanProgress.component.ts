@@ -26,6 +26,7 @@ export class LoanProgressComponent implements OnInit{
     showEdit = false;
     showTable = true;
     editLoanForm :FormGroup;
+    search = '';
     loanUpdateID;
     loanData;
     constructor(
@@ -126,9 +127,10 @@ export class LoanProgressComponent implements OnInit{
           document.body.removeChild(selBox);
         }
         
-    info(index: any){
+    info(loanID: any){
+        let value = this.finalData.filter((val: any) => val.loanID == loanID);
         const modalRef = this.modalService.open(InfoModalComponent);
-        modalRef.componentInstance.loanData = this.finalData[index];
+        modalRef.componentInstance.loanData = value[0];
     }
 
     closeLoan(data){

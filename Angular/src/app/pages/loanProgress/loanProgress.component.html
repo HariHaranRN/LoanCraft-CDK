@@ -39,7 +39,7 @@
             <tbody>
               <tr *ngFor="let row of progressTable.dataRows; index as i">
                 <td class="text-center">{{ i + 1 }}</td>
-                <td class="text-center text-primary">{{ row[0] }}</td>
+                <td class="text-center text-primary" (click)="copyText(row[0])" ><span placement="top" style="cursor: context-menu;" ngbTooltip="✅ Copied" triggers="click:blur">{{ row[0] }}</span></td>
                 <td class="text-center">{{row[1] }}</td>
                 <td class="text-center"> {{row[2] | date:'dd-MM-yyyy'}}</td>
                 <td class="text-center">{{row[3] | currency:'INR':'symbol-narrow':'0.0' }}</td>

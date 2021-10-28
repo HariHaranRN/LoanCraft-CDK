@@ -36,16 +36,19 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label for="exampleInputEmail1">Mobile No</label>
-                <input type="text" class="form-control" formControlName="mobileNo" required>
-                <small style="font-size: 70%;" *ngIf="newLoanForm.get('mobileNo').hasError('required') && newLoanForm.get('mobileNo').touched">
+                <input type="number" class="form-control" formControlName="mobileNo" minlength="10" required>
+                <small style="font-size: 70%;" *ngIf="newLoanForm.get('mobileNo').hasError('required') && newLoanForm.get('mobileNo').touched ">
                   <b class="text-danger">Required!</b>
+                </small>
+                <small style="font-size: 70%;" *ngIf="newLoanForm.get('mobileNo').hasError('minlength') && newLoanForm.get('mobileNo').touched">
+                  <b class="text-danger">Mobile must 10 digits!</b>
                 </small>
               </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
                 <label>Alternate Mobile No</label>
-                <input type="text" class="form-control" formControlName="aMobileNo">
+                <input type="number" class="form-control" formControlName="aMobileNo">
               </div>
             </div>
           </div>
@@ -61,7 +64,7 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-md-6 pr-1">
+            <div class="col-md-6">
               <div class="form-group">
                 <label>Amount</label>
                 <input type="number" class="form-control" formControlName="amount" required>
@@ -70,7 +73,7 @@
                 </small>
               </div>
             </div>
-            <div class="col-md-6 px-1">
+            <div class="col-md-6">
               <div class="form-group">
                 <label>Interest(per month)</label>
                 <input type="number" class="form-control" formControlName="interest" required>

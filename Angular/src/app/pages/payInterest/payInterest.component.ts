@@ -49,17 +49,18 @@ export class PayInterestComponent implements OnInit{
         let finalResult = result.data.getLoanByID;
             if(finalResult.length > 0){
                 this.interestPaid = finalResult[0].interestPaid;
-                debugger
                 let created = new Date(finalResult[0].date);
                 let currentDate = new Date();
+                if(finalResult[0].closingDate){
+                    currentDate = new Date(finalResult[0].closingDate);
+                }
                 var months;
                 months = (currentDate.getFullYear() - created.getFullYear()) * 12;
                 months -= created.getMonth();
                 months += currentDate.getMonth();
                 months <= 0 ? 0 : months;
                 var total = months * finalResult[0].interest;
-                var pending = total - finalResult[0].interestPaid;
-                this.pendingAmount = pending;
+                this.pendingAmount = total - finalResult[0].interestPaid;
                 this.disabledForm.get('loanID').setValue(finalResult[0].loanID)
                 this.disabledForm.get('name').setValue(finalResult[0].name);
                 this.disabledForm.get('pName').setValue(finalResult[0].parentName);

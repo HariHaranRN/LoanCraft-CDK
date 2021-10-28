@@ -29,6 +29,7 @@ export class LoanProgressService
                 interest
                 interestPaid
                 notes
+                closingDate
                 isActive
                 }
             }
@@ -54,6 +55,7 @@ export class LoanProgressService
               interest
               interestPaid
               notes
+              closingDate
               isActive
             }
           }
@@ -91,12 +93,13 @@ export class LoanProgressService
         return result;
     }
 
-    async updateLoanStatus(id, status): Promise<any> {
+    async updateLoanStatus(id, status, closingDate?): Promise<any> {
         this.spinner.show();
         const query = `
         mutation changeLoanStatus {
-            changeLoanStatus(isActive: ${status}, loanID: "${id}") {
+            changeLoanStatus(isActive: ${status}, loanID: "${id}", closingDate: "${closingDate}") {
               isActive
+              closingDate
             }
         }
         `

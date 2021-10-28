@@ -10,6 +10,7 @@ type Loan {
     interest: Int
     interestPaid: Int
     notes: String
+    closingDate: String
     isActive: Boolean
 }
 
@@ -55,7 +56,7 @@ type Query {
 type Mutation {
     createLoan(loan: createLoanInput!): Loan
     updateLoan(loan: updateLoanInput!): Loan
-    changeLoanStatus(loanID: String!, isActive: Boolean!): Loan
+    changeLoanStatus(loanID: String!, isActive: Boolean!, closingDate: String): Loan
     updatePendingAmount(loanID: String!, interestPaid: Int!, dateOfPaid: String!): Loan
     deleteLoan(loanID: String!): String
 }

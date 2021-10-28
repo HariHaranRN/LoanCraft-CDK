@@ -42,7 +42,7 @@ export class ClosedLoansComponent implements OnInit{
                 months <= 0 ? 0 : months;
                 var total = months * this.finalData[i].interest;
                 var pendingAmount = total - this.finalData[i].interestPaid;
-                this.datas[i] = [ this.finalData[i].loanID, this.finalData[i].name, this.finalData[i].date, this.finalData[i].amount, this.finalData[i].interest , pendingAmount]
+                this.datas[i] = [ this.finalData[i].loanID, this.finalData[i].name, this.finalData[i].date, this.finalData[i].closingDate, this.finalData[i].amount, this.finalData[i].interest , pendingAmount]
             }
             this.datas.sort();
             this.datas.reverse();

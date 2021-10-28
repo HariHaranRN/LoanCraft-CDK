@@ -27,6 +27,7 @@ export class LoanProgressComponent implements OnInit{
     showTable = true;
     editLoanForm :FormGroup;
     search = '';
+    editAccess = true;
     loanUpdateID;
     loanData;
     constructor(
@@ -40,16 +41,16 @@ export class LoanProgressComponent implements OnInit{
         this.showEdit = false;
         this.showTable = true;
         this.editLoanForm = fb.group({
-            name: [{ value: "", disabled: false},[Validators.required]],
-            pName: [{ value: "", disabled: false},[Validators.required]],
-            date: [{ value: "", disabled: false},[Validators.required]],
-            mobileNo: [{ value: "", disabled: false},[Validators.required]],
-            aMobileNo: [{ value: "", disabled: false}],
-            address: [{ value: "", disabled: false},[Validators.required]],
-            amount: [{ value: "", disabled: false},[Validators.required]],
-            interest: [{ value: "", disabled: false},[Validators.required]],
-            interestPaid: [{ value: 0, disabled: true},[Validators.required]],
-            notes: [{ value: "", disabled: false}]
+            name: [{ value: "", disabled: this.editAccess},[Validators.required]],
+            pName: [{ value: "", disabled: this.editAccess},[Validators.required]],
+            date: [{ value: "", disabled: this.editAccess},[Validators.required]],
+            mobileNo: [{ value: "", disabled: this.editAccess},[Validators.required]],
+            aMobileNo: [{ value: "", disabled: this.editAccess}],
+            address: [{ value: "", disabled: this.editAccess},[Validators.required]],
+            amount: [{ value: "", disabled: this.editAccess},[Validators.required]],
+            interest: [{ value: "", disabled: this.editAccess},[Validators.required]],
+            interestPaid: [{ value: 0, disabled: this.editAccess},[Validators.required]],
+            notes: [{ value: "", disabled: this.editAccess}]
         });
     }
     async ngOnInit(){
@@ -111,6 +112,7 @@ export class LoanProgressComponent implements OnInit{
         this.editLoanForm.markAsUntouched();
         this.editLoanForm.markAsPristine();
         sessionStorage.clear();
+        this.editAccess = true;
     }
 
     copyText(val: string){
@@ -125,7 +127,34 @@ export class LoanProgressComponent implements OnInit{
           selBox.select();
           document.execCommand('copy');
           document.body.removeChild(selBox);
+    }
+
+    editAccessFun(){
+        if (this.editAccess) {
+            this.editLoanForm.get('name').enable();
+            this.editLoanForm.get('pName').enable();
+            this.editLoanForm.get('date').enable();
+            this.editLoanForm.get('mobileNo').enable();
+            this.editLoanForm.get("aMobileNo").enable();
+            this.editLoanForm.get("address").enable();
+            this.editLoanForm.get("amount").enable();
+            this.editLoanForm.get("interest").enable();
+            this.editLoanForm.get("interestPaid").enable();
+            this.editLoanForm.get("notes").enable();
+        } else {
+            this.editLoanForm.get('name').disable();
+            this.editLoanForm.get('pName').disable();
+            this.editLoanForm.get('date').disable();
+            this.editLoanForm.get('mobileNo').disable();
+            this.editLoanForm.get("aMobileNo").disable();
+            this.editLoanForm.get("address").disable();
+            this.editLoanForm.get("amount").disable();
+            this.editLoanForm.get("interest").disable();
+            this.editLoanForm.get("interestPaid").disable();
+            this.editLoanForm.get("notes").disable();
         }
+        this.editAccess = !this.editAccess;
+    }
         
     info(loanID: any){
         let value = this.finalData.filter((val: any) => val.loanID == loanID);
@@ -134,7 +163,6 @@ export class LoanProgressComponent implements OnInit{
     }
 
     closeLoan(data){
-
         const modalRef = this.modalService.open(CloseWarningComponent);
         modalRef.componentInstance.data = data;
     }
@@ -152,7 +180,7 @@ export class LoanProgressComponent implements OnInit{
             this.editLoanForm.get('name').setValue(data[0].name);
             this.editLoanForm.get('pName').setValue(data[0].parentName);
             this.editLoanForm.get('date').setValue(data[0].date);
-            this.editLoanForm.get('mobileNo').setValue(data[0].mobile);
+            this.editLoanForm.get('mobileNo').setValue(JSON.parse(data[0].mobile));
             this.editLoanForm.get("aMobileNo").setValue(data[0].aMobile);
             this.editLoanForm.get("address").setValue(data[0].address);
             this.editLoanForm.get("amount").setValue(data[0].amount);

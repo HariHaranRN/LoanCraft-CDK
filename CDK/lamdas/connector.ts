@@ -14,7 +14,7 @@ exports.handler = async (event:LoanEvents) => {
         case "updateLoan":
             return await LoanService.updateLoan(event.arguments.loan);
         case "changeLoanStatus":
-            return await LoanService.changeLoanStatus(event.arguments.loanID, event.arguments.isActive);
+            return await LoanService.changeLoanStatus(event.arguments.loanID, event.arguments.isActive, event.arguments.closingDate);
         case "updatePendingAmount":
             return await LoanService.updatePendingAmount(event.arguments.loanID, event.arguments.interestPaid, event.arguments.dateOfPaid)
         case "deleteLoan":

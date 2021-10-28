@@ -134,21 +134,41 @@ export class LoanService {
         }
     }
 
-    static async changeLoanStatus(loanID: string, isActive: boolean){
-        const params = {
-            TableName: process.env.LOANS_TABLE,
-            Key: {
-              loanID: loanID,
-            },
-            UpdateExpression: 'SET #isActive=:isActive',
-            ExpressionAttributeValues: {
-              ':isActive': isActive,
-            },
-            ExpressionAttributeNames: {
-              '#isActive': 'isActive',
-            },
-            ReturnValues: 'ALL_NEW',
-        };
+    static async changeLoanStatus(loanID: string, isActive: boolean, closingDate?: string){
+        let params;
+        if(isActive){
+            params = {
+                TableName: process.env.LOANS_TABLE,
+                Key: {
+                  loanID: loanID,
+                },
+                UpdateExpression: 'SET #isActive=:isActive',
+                ExpressionAttributeValues: {
+                  ':isActive': isActive,
+                },
+                ExpressionAttributeNames: {
+                  '#isActive': 'isActive',
+                },
+                ReturnValues: 'ALL_NEW',
+            };
+        }else {
+            params = {
+                TableName: process.env.LOANS_TABLE,
+                Key: {
+                  loanID: loanID,
+                },
+                UpdateExpression: 'SET #isActive=:isActive, #closingDate=:closingDate',
+                ExpressionAttributeValues: {
+                  ':isActive': isActive,
+                  ':closingDate': closingDate
+                },
+                ExpressionAttributeNames: {
+                  '#isActive': 'isActive',
+                  '#closingDate': 'closingDate'
+                },
+                ReturnValues: 'ALL_NEW',
+            };
+        }
 
         try {
             const result = await docClient.update(params).promise();

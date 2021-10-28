@@ -5,6 +5,7 @@ type LoanEvents = {
     arguments: {
         loanID: string
         historyId: string
+        closingDate: string
         loan: Loan
         interestPaid: number
         isActive: boolean
@@ -26,5 +27,6 @@ type Loan = {
     historyId: string
     historyEntryPosition: string
     historyDate: string
+    closingDate: string
     isActive: boolean
 }

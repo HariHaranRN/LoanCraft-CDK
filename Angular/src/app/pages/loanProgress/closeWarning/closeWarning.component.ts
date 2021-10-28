@@ -30,7 +30,7 @@ pendingAmount;
   }
 
   async confirm(){
-    let result = await this.LPS.updateLoanStatus(this.loanID, false);
+    let result = await this.LPS.updateLoanStatus(this.loanID, false, new Date().toISOString().split('T')[0]);
     let status = result.data.changeLoanStatus.isActive;
     if(!status){
         this.router.navigateByUrl('/progressReport', { skipLocationChange: true }).then(() => {
